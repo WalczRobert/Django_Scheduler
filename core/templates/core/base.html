@@ -1,0 +1,50 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Scheduler{% endblock %}</title>
+
+
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Scheduling App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ml-auto {% if not user.is_authenticated %}mr-auto{% endif %}">
+                <a class="nav-item nav-link {% block scheduler_active %}{% endblock %}"
+                    href="{% url 'schedule_create' %}">Scheduler</a>
+                <a class="nav-item nav-link {% block schedule_active %}{% endblock %}"
+                    href="{% url 'schedule_list' %}">Schedule</a>
+                <a class="nav-item nav-link {% block admin_active %}{% endblock %}" href="{% url 'admin' %}">Admin</a>
+            </ul>
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container pt-4">
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+        {% block maincontent %}{% endblock %}
+    </div>
+
+    {% bootstrap_javascript jquery='full' %}
+</body>
+
+</html>

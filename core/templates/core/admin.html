@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+{% load bootstrap4 %}
+{% block title %}Admin{% endblock %}
+{% block admin_active %}active{% endblock %}
+{% block maincontent %}
+<div class="d-flex flex-wrap justify-content-center">
+    <div class="col-sm-12 col-lg-9 mb-3">
+        <div class="card border-success">
+            <div class="card-header">
+                <h3>Create User</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'admin' %}">
+                    {% csrf_token %}
+                    {% bootstrap_form form1 %}
+                    {% buttons %}
+                    <input type="submit" class="btn btn-success" value="Create" name="Create">
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-9 mb-3">
+        <div class="card border-danger">
+            <div class="card-header">
+                <h3>Delete User</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'admin' %}">
+                    {% csrf_token %}
+                    {% bootstrap_form form2 %}
+                    {% buttons %}
+                    <input type="submit" class="btn btn-danger" value="Delete" name="Delete">
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-9 mb-3">
+        <div class="card border-info">
+            <div class="card-header">
+                <h3>Change Max Out</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'admin' %}">
+                    {% csrf_token %}
+                    {% bootstrap_form form3 %}
+                    {% buttons %}
+                    <input type="submit" class="btn btn-info" value="Change" name="Change">
+                    <p class="float-right">Current: {{max_out}}</p>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

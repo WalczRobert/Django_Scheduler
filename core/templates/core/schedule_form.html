@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load bootstrap4 %}
+{% block title %}Scheduler{% endblock %}
+{% block scheduler_active %}active{% endblock %}
+{% block maincontent %}
+<div class="d-flex flex-wrap justify-content-center">
+    <div class="col-sm-12 col-lg-9 mb-3">
+        <form method="post" action="{% url 'schedule_create' %}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {% endbuttons %}
+        </form>
+    </div>
+</div>
+{% endblock %}

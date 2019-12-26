@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load bootstrap4 %}
+{% block title %}Login{% endblock %}
+{% block maincontent %}
+<div class="d-flex flex-wrap justify-content-center">
+    <div class="col-sm-12 col-lg-9 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h3>Login</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                    <input type="submit" class="btn btn-primary float-right" value="Login">
+                    <input type="hidden" name="next" value="{{ next }}">
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
